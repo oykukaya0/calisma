@@ -1,5 +1,6 @@
 node_modules/
 .env
+pokemon.db
 .env.local
 *.log
 npm-debug.log*
@@ -9,3 +10,4 @@ Thumbs.db
 .idea/
 coverage/
 dist/
+
