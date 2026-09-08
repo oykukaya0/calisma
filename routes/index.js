@@ -20,6 +20,6 @@ router.use('/health', require('./health'));
 router.use('/pokemon', require('./pokemon'));
 
 // Kisi 2 (feature/database) su satirin yorumunu kaldiracak:
-// router.use('/team', require('./team'));
+ router.use('/team', require('./team'));
 
 module.exports = router;
