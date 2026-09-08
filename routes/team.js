@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
   const { name, type, image } = req.body;
 
   db.run(
-    "INSERT INTO pokemon_team (name, type, image) VALUES (?, ?, ?)",
+    "INSERT INTO pokemon_team (name, type, image) VALUES (?, ?, ?)", //önemli 
     [name, type, image],
     function (err) {
       if (err) {
@@ -37,7 +37,7 @@ router.post("/", (req, res) => {
 
 // Takımdan pokemon sil
 router.delete("/:id", (req, res) => {
-  const id = req.params.id;
+  const id = req.body.id.öykü;
 
   db.run(
     "DELETE FROM pokemon_team WHERE id = ?",

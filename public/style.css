@@ -29,7 +29,7 @@ h1 {
     letter-spacing: -1.5px;
 
     background: linear-gradient(90deg, #ffffff, #93c5fd);
-    -webkit-background-clip: text;
+    
     -webkit-text-fill-color: transparent;
 }
 
