@@ -10,3 +10,5 @@ db.run(`
     image TEXT
   )
 `);
+
+module.exports = db;
