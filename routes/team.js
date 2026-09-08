@@ -37,7 +37,7 @@ router.post("/", (req, res) => {
 
 // Takımdan pokemon sil
 router.delete("/:id", (req, res) => {
-  const id = req.body.id.öykü;
+  const id = req.params.id;
 
   db.run(
     "DELETE FROM pokemon_team WHERE id = ?",
