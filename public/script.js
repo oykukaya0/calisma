@@ -66,21 +66,75 @@ function showPokemonCard(pokemon) { //Gelen Pokémon verisini HTML kartına çev
         addPokemonToTeam(pokemon);
     });
 }
-function addPokemonToTeam(pokemon) {
-    const pokemonDiv = document.createElement("div"); //js ile yeni bir div oluşturulur
+async function addPokemonToTeam(pokemon) {
+    const response = await fetch("/api/team", {
+        method: "POST",
 
-    pokemonDiv.classList.add("team-pokemon"); //bu div’e class veriyoruz.
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-    pokemonDiv.innerHTML = `
-        <span>${pokemon.displayName}</span>
-        <button class="removeBtn">Çıkar</button>
-    `;
-
-    const removeBtn = pokemonDiv.querySelector(".removeBtn");
-
-    removeBtn.addEventListener("click", function () {
-        pokemonDiv.remove();
+        body: JSON.stringify({
+            name: pokemon.displayName,
+            type: pokemon.types.join(", "),
+            image: pokemon.image
+        })
     });
 
-    team.appendChild(pokemonDiv);
+    if (!response.ok) {
+        alert("Pokémon takıma eklenemedi.");
+        return;
+    }
+
+    loadTeam();
+}
+async function loadTeam() {
+    const response = await fetch("/api/team");
+
+    if (!response.ok) {
+        team.innerHTML = "Takım yüklenemedi.";
+        return;
+    }
+
+    const teamData = await response.json();
+
+    team.innerHTML = "";
+
+    teamData.forEach(function (pokemon) {
+        const pokemonDiv = document.createElement("div");
+
+        pokemonDiv.classList.add("team-pokemon");
+
+        pokemonDiv.innerHTML = `
+            <img src="${pokemon.image}" alt="${pokemon.name}">
+            <div>
+                <span>${pokemon.name}</span>
+                <p>${pokemon.type}</p>
+            </div>
+
+            <button class="removeBtn">
+                Çıkar
+            </button>
+        `;
+
+        const removeBtn = pokemonDiv.querySelector(".removeBtn");
+
+        removeBtn.addEventListener("click", async function () {
+            await deletePokemonFromTeam(pokemon.id);
+        });
+
+        team.appendChild(pokemonDiv);
+    });
+}
+async function deletePokemonFromTeam(id) {
+    const response = await fetch(`/api/team/${id}`, {
+        method: "DELETE"
+    });
+
+    if (!response.ok) {
+        alert("Pokémon takımdan çıkarılamadı.");
+        return;
+    }
+
+    loadTeam();
 }
