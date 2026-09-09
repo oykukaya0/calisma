@@ -5,7 +5,7 @@ Pokémon Team Builder is a full-stack web application that allows users to searc
 This project was developed as a team project to practice **Git/GitHub workflows, REST APIs, frontend-backend communication, and database operations**.
 ## 📸 Screenshot
 
-[Pokémon Team Builder] (screenshots/pokemon-team-builder.png)
+![Pokémon Team Builder] (screenshots/pokemon-team-builder.png)
 
 ## 🚀 Features
 
